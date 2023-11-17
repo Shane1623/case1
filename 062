@@ -1,0 +1,84 @@
+
+// JPA06_2.java
+
+class CPU {
+    double speed;
+
+    CPU(double speed) {
+        this.speed = speed;
+    }
+}
+
+class HD {
+    int capacity;
+
+    HD(int capacity) {
+        this.capacity = capacity;
+    }
+}
+
+class PC {
+    CPU cpu;
+    HD hd;
+
+
+    PC(CPU cpu, HD hd) {
+        this.cpu = cpu;
+        this.hd = hd;
+    }
+
+    int getCost() {
+        return (int) ((cpu.speed == 2.4 ? 11000 : 0) + (hd.capacity == 160 ? 2800 : 0) + 500);
+    }
+
+    int getPrice() {
+        return (int) (getCost() * 1.8);
+    }
+}
+
+class MultiPC {
+    CPU[] cpus;
+    HD[] hds;
+
+    MultiPC(CPU[] cpus, HD[] hds) {
+        this.cpus = cpus;
+        this.hds = hds;
+    }
+
+    int getCost() {
+        int cost = 0;
+        for (CPU cpu : cpus) {
+            cost += (cpu.speed == 2.4 ? 11000 : 0);
+        }
+        for (HD hd : hds) {
+            cost += (hd.capacity == 160 ? 2800 : 0);
+        }
+        return cost;
+    }
+
+    int getPrice() {
+        return (int) (getCost() * 1.8);
+    }
+
+}
+
+public class JPA06_2 {
+    public static void main(String[] args) {
+        CPU cpu1 = new CPU(2.4);
+        HD hd1 = new HD(160);
+        PC pc1 = new PC(cpu1, hd1);
+
+        CPU[] multiCpu1 = {new CPU(2.4), new CPU(2.4)};
+        HD[] multiHd1 = {new HD(160), new HD(160), new HD(160), new HD(160)};
+        MultiPC multiPC1 = new MultiPC(multiCpu1, multiHd1);
+
+        CPU[] multiCpu2 = {new CPU(2.4), new CPU(2.4), new CPU(2.4), new CPU(2.4)};
+        HD[] multiHd2 = {new HD(160), new HD(160), new HD(160), new HD(160), new HD(160), new HD(160), new HD(160), new HD(160)};
+
+        MultiPC multiPC2 = new MultiPC(multiCpu2, multiHd2);
+
+        System.out.println("PC1 Cost: " + pc1.getCost() + " Price: " + pc1.getPrice());
+        System.out.println("MultiPC1 Cost: " + multiPC1.getCost() + " Price: " + multiPC1.getPrice());
+        System.out.println("MultiPC2 Cost: " + multiPC2.getCost() + " Price: " + multiPC2.getPrice());
+    }
+}
