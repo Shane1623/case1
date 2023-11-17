@@ -1,0 +1,40 @@
+
+// JPA06_3.java
+
+class Notels {
+
+    public int getPrice() {
+        return 0;
+    }
+    // ... (Assuming the Notels class is defined as in the previous examples)
+}
+
+class PC {
+
+    public int getPrice() {
+        return 0;
+    }
+    // ... (Assuming the PC class is defined as in the previous examples)
+}
+
+class AlPC {
+    static boolean isExpensive(Notels notels, PC pc) {
+        return notels.getPrice() > pc.getPrice();
+    }
+}
+
+public class JPA06_3 {
+    public static void main(String[] args) {
+
+        Notels notels = new Notels(); // Assuming Notels class is instantiated with desired specifications
+        PC pc = new PC(); // Assuming PC class is instantiated with desired specifications
+
+        boolean notelsIsExpensive = AlPC.isExpensive(notels, pc);
+
+        if (notelsIsExpensive) {
+            System.out.println("Notels is more expensive than PC.");
+        } else {
+            System.out.println("PC is more expensive than Notels.");
+        }
+    }
+}
